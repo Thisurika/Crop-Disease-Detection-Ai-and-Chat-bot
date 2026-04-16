@@ -4,7 +4,7 @@
 A smart web application that helps farmers detect plant diseases from leaf images and get practical treatment advice using AI.
 
 ![Plant AI Demo](https://via.placeholder.com/800x400?text=Plant+AI+Demo)  
-*(Replace with your actual screenshot)*
+*(Replace with your actual screenshot)*.
 
 ## ✨ Features
 

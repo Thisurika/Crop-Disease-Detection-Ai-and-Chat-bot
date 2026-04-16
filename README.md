@@ -8,7 +8,7 @@ A smart web application that helps farmers detect plant diseases from leaf image
 
 ## ✨ Features
 
-- **Leaf Image Upload** with drag & drop support
+- **Leaf Image Upload** with drag & drop support.
 - **Disease Detection** using Deep Learning (MobileNetV2)
 - **Confidence Score** with visual progress bar
 - **Expert Advice** powered by Google Gemini AI + FAQ system

@@ -1,17 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Plant AI - Disease Detection</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}?v=3">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* Force Chat Bubble to Float - Bypasses External Cache */
+        .chat-bubble {
+            position: fixed !important;
+            bottom: 30px !important;
+            right: 30px !important;
+            background: #22c55e !important;
+            color: white !important;
+            padding: 16px 24px !important;
+            border-radius: 50px !important;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            cursor: pointer !important;
+            transition: all 0.3s !important;
+            z-index: 999999 !important;
+        }
+
+        .chat-bubble:hover {
+            background: #16a34a !important;
+            transform: scale(1.1) !important;
+        }
+
+        .chat-bubble i {
+            font-size: 1.6rem !important;
+        }
+
+        .chat-container {
+            position: fixed !important;
+            bottom: 90px !important;
+            right: 30px !important;
+            width: 350px !important;
+            height: auto !important;
+            background: white !important;
+            border-radius: 20px !important;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3) !important;
+            overflow: hidden !important;
+            z-index: 999999 !important;
+            display: none;
+            /* Initially hidden */
+            flex-direction: column !important;
+        }
+
+        .chat-header {
+            background: #2f855a !important;
+            color: white !important;
+            padding: 18px !important;
+            text-align: center !important;
+            font-size: 1.4rem !important;
+            font-weight: 600 !important;
+        }
+
+        .chat-body {
+            height: 340px !important;
+            overflow-y: auto !important;
+            padding: 25px !important;
+            background: #fafafa !important;
+            color: #333 !important;
+        }
+
+        .chat-input-area {
+            display: flex !important;
+            padding: 18px !important;
+            border-top: 1px solid #e0e0e0 !important;
+            background: white !important;
+        }
+    </style>
+    <script>
+        function toggleChat() {
+            var cc = document.getElementById('chatContainer');
+            if (cc.style.display === 'none' || cc.style.display === '') {
+                cc.style.display = 'flex';
+            } else {
+                cc.style.display = 'none';
+            }
+        }
+    </script>
 </head>
+
 <body>
     <div class="hero">
         <div class="hero-content">
             <div class="logo">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1EeDzKWD6heMr7x7NNkgSAFH2-jpHltsnlw&s" alt="Plant AI Logo" width="60"/>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1EeDzKWD6heMr7x7NNkgSAFH2-jpHltsnlw&s"
+                    alt="Plant AI Logo" width="60" />
                 <span>Plant AI</span>
             </div>
             <h1>Try our AI Powered Disease Detection</h1>
@@ -24,32 +105,54 @@
         <h2>How it works?</h2>
         <div class="steps">
             <div class="step">
-                <img src="https://t3.ftcdn.net/jpg/03/33/67/80/360_F_333678091_tOcalp3NEz7oNgOSS8gXYtfH5Q4DPOV9.jpg" alt="Click a Pic" />
+                <img src="https://t3.ftcdn.net/jpg/03/33/67/80/360_F_333678091_tOcalp3NEz7oNgOSS8gXYtfH5Q4DPOV9.jpg"
+                    alt="Click a Pic" />
                 <h3>Click a Pic</h3>
                 <p>Take a Picture of your plant leaf</p>
             </div>
             <div class="step">
-                <img src="https://png.pngtree.com/png-clipart/20190920/original/pngtree-file-upload-icon-png-image_4646955.jpg" alt="Upload" />
+                <img src="https://png.pngtree.com/png-clipart/20190920/original/pngtree-file-upload-icon-png-image_4646955.jpg"
+                    alt="Upload" />
                 <h3>Upload on Plant AI</h3>
                 <p>Visit Plant AI on your device and click on Try Now to upload your picture</p>
             </div>
             <div class="step">
-                <img src="https://static.vecteezy.com/system/resources/previews/009/317/381/non_2x/report-icon-logo-illustration-audit-and-analysis-symbol-template-for-graphic-and-web-design-collection-free-vector.jpg" alt="Report" />
+                <img src="https://static.vecteezy.com/system/resources/previews/009/317/381/non_2x/report-icon-logo-illustration-audit-and-analysis-symbol-template-for-graphic-and-web-design-collection-free-vector.jpg"
+                    alt="Report" />
                 <h3>Get final Report</h3>
                 <p>Plant AI will analyze your plant and will display a detailed report for you</p>
             </div>
             <div class="step">
-                <img src="https://png.pngtree.com/png-vector/20220716/ourmid/pngtree-chat-bot-symbol-and-logo-vector-icon-modern-ai-operator-vector-png-image_37969556.png" alt="Chat" />
+                <img src="https://png.pngtree.com/png-vector/20220716/ourmid/pngtree-chat-bot-symbol-and-logo-vector-icon-modern-ai-operator-vector-png-image_37969556.png"
+                    alt="Chat" />
                 <h3>Chat with AI</h3>
                 <p>Ask Plant AI questions about care, diseases, and treatments for your plant</p>
             </div>
         </div>
     </section>
 
+    <!-- Chat Section (Floating) -->
+    <div class="chat-container" id="chatContainer" style="display: none;">
+        <div class="chat-header">
+            <button id="closeChatBtn" onclick="toggleChat()"
+                style="background: none; border: none; color: white; float: right; cursor: pointer; font-size: 1.2rem;"><i
+                    class="fas fa-times"></i></button>
+            <h3>Chat with Plant AI</h3>
+        </div>
+        <div class="chat-body" id="chatBody"></div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Ask about crop diseases..." />
+            <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
     <!-- Floating Chat Bubble -->
-    <div class="chat-bubble">
+    <div class="chat-bubble" id="chatBubble" onclick="toggleChat()">
         <i class="fas fa-comment-dots"></i>
         <span>Chat with AI</span>
     </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}?v=3"></script>
 </body>
+
 </html>

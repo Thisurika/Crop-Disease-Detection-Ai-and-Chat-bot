@@ -7,7 +7,7 @@ Plant Disease & Crop Advice Chatbot
 
 import os
 import pandas as pd
-from groq import Groq
+import requests
 from dotenv import load_dotenv
 
 # Load .env variables
@@ -16,12 +16,7 @@ load_dotenv()
 # ────────────────────────────────────────────────
 # CONFIG
 # ────────────────────────────────────────────────
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-
-if not GROQ_API_KEY:
-    raise ValueError("GROQ_API_KEY not found in .env file. Please add it.")
-
-client = Groq(api_key=GROQ_API_KEY)
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 
 # FAQ file
 FAQ_PATH = "plant_faq.csv"
@@ -49,8 +44,11 @@ def get_chat_response(query: str, disease: str = None, history: list = None) -> 
         if not match.empty:
             return match.iloc[0]['advice']
 
-    # Step 2: Groq LLM
+    # Step 2: Groq LLM (via REST API)
     try:
+        if not GROQ_API_KEY:
+            return "Setup required: Please add your GROQ_API_KEY to the .env file to enable the AI Chatbot."
+
         system_prompt = """
 You are an expert agricultural advisor in Sri Lanka, helping farmers with plant diseases, pests, and crop care.
 - Use very simple, practical Sinhala/English mixed language if possible (keep it easy).
@@ -61,33 +59,45 @@ You are an expert agricultural advisor in Sri Lanka, helping farmers with plant 
 - Keep answers short and clear (max 150-200 words).
 """
 
-        messages = [{"role": "system", "content": system_prompt}]
+        messages = [
+            {"role": "system", "content": system_prompt}
+        ]
 
-        # Add history if provided (for future memory support)
         if history:
-            messages.extend(history)
+            for msg in history:
+                role = "user" if msg.get("role") == "user" else "assistant"
+                messages.append({"role": role, "content": msg["content"]})
 
-        # Add disease context
         user_message = f"Question: {query}"
         if disease:
             user_message += f"\nDetected disease: {disease}"
 
         messages.append({"role": "user", "content": user_message})
 
-        completion = client.chat.completions.create(
-            messages=messages,
-            model="llama-3.3-70b-versatile",          # Current, supported, high-quality model
-            temperature=0.7,
-            max_tokens=400,
-            top_p=0.9
-        )
+        url = "https://api.groq.com/openai/v1/chat/completions"
+        headers = {
+            "Authorization": f"Bearer {GROQ_API_KEY}",
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "model": "llama-3.3-70b-versatile",
+            "messages": messages,
+            "temperature": 0.7,
+            "max_tokens": 400
+        }
 
-        return completion.choices[0].message.content.strip()
+        response = requests.post(url, json=payload, headers=headers)
+        response_data = response.json()
+
+        if response.status_code != 200:
+            return f"Sorry, AI model error: {response_data.get('error', {}).get('message', 'Unknown error')}"
+
+        return response_data['choices'][0]['message']['content'].strip()
 
     except Exception as e:
         error_msg = str(e)
-        if "decommissioned" in error_msg or "model" in error_msg:
-            return "Sorry, the AI model is temporarily unavailable. Please try again later or contact a local agriculture officer."
+        if "API_KEY_INVALID" in error_msg or "authentication" in error_msg.lower():
+            return "Sorry, the AI model is temporarily unavailable due to invalid API Key credentials. Please try again later."
         return f"Sorry, I couldn't connect right now (error: {error_msg}). Try again or ask a local expert."
 
 

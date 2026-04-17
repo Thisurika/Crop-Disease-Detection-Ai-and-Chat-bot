@@ -32,6 +32,41 @@ A smart web application that helps farmers detect plant diseases from leaf image
 ### Dataset
 - PlantVillage Dataset (15 classes: Tomato, Potato, Pepper diseases)
 
+- 
+---
+
+## ⚙️ Installation & Setup
+
+### 1. Clone repository
+
+### 2. Create virtual environment
+
+### 3. Install dependencies
+
+### 4. Add dataset
+- Download dataset separately
+- Place it inside `backend/dataset/`
+
+---
+
+## ▶️ Run Project
+
+Then open: https://127.0.0:5000
+
+
+---
+
+## ⚠️ Notes
+- Dataset is not included due to size limitations
+- Virtual environment is ignored in GitHub
+- Ensure TensorFlow version matches requirements
+
+---
+
+## 👨‍💻 Author
+Thisurika Hasajith
+SLIIT Student  
+
 ## 📂 Project Structure
 
 ```bash
@@ -55,3 +90,5 @@ CHATBOT/
 ├── .env                          # Api Keys
 ├──  venv folder                 
 └── README.md
+
+

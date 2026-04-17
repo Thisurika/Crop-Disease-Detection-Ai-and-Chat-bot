@@ -52,5 +52,6 @@ CHATBOT/
 │       ├── css/style.css
 │       └── js/script.js
 ├── dataset/color/                # Your 15 class folders
-├── .env                          # API keys
+├── .env                          # Api Keys
+├──  venv folder                 
 └── README.md

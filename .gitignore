@@ -7,3 +7,5 @@ class_indices.json
 venv/
 env/
 .venv/
+.env
+*.pyc

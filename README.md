@@ -3,6 +3,42 @@
 This repository contains a plant disease detection web app with a chat assistant for crop advice.
 The backend is built with Flask and TensorFlow, and the frontend is a simple image upload + chat UI.
 
+## 🌱 Plant AI Demo
+
+Here are some screenshots of the application:
+
+![Screenshot 1](sc/1.png)
+![Screenshot 2](sc/2.png)
+![Screenshot 3](sc/3.png)
+![Screenshot 4](sc/4.png)
+![Screenshot 5](sc/5.png)
+
+## ✨ Features
+
+- **Leaf Image Upload** with drag & drop support.
+- **Disease Detection** using Deep Learning (MobileNetV2)
+- **Confidence Score** with visual progress bar
+- **Expert Advice** powered by Google Gemini AI + FAQ system
+- **Interactive Chat** - Ask any questions about treatment or prevention
+- **Beautiful & Responsive UI** with green agricultural theme
+- **Practical Sri Lanka-focused advice** (neem oil, cow urine, monsoon tips, etc.)
+
+## 🛠️ Tech Stack
+
+### Backend
+- **Python** + **Flask**
+- **TensorFlow / Keras** (MobileNetV2 - Transfer Learning)
+- **Google Gemini API** (for intelligent advice)
+- **Pandas** (FAQ system)
+
+### Frontend
+- **HTML5, CSS3, JavaScript**
+- Drag & Drop Upload
+- Real-time Chat Interface
+
+### Dataset
+- PlantVillage Dataset (15 classes: Tomato, Potato, Pepper diseases)
+
 ## Setup
 
 1. Open a terminal in the repo root:
@@ -61,9 +97,13 @@ Then open your browser at:
 - `requirements.txt` – root dependency list for the repo
 - `.gitignore` – files and folders excluded from Git
 
+
 ## Troubleshooting
 
 - If TensorFlow fails to load, confirm your Python version and installed packages.
 - If the chatbot raises `GROQ_API_KEY not found`, make sure `.env` exists and contains the key.
 - If the app cannot find `plant_disease_model.h5`, place the model file in the repo root or retrain from `backend/train_cnn.py`.
-- If you accidentally committed a secret, rotate or revoke the exposed key and store it only in `.env`.
+
+## 👨‍💻 Author
+Thisurika Hasajith
+SLIIT Student  

@@ -66,3 +66,4 @@ Then open your browser at:
 - If TensorFlow fails to load, confirm your Python version and installed packages.
 - If the chatbot raises `GROQ_API_KEY not found`, make sure `.env` exists and contains the key.
 - If the app cannot find `plant_disease_model.h5`, place the model file in the repo root or retrain from `backend/train_cnn.py`.
+- If you accidentally committed a secret, rotate or revoke the exposed key and store it only in `.env`.

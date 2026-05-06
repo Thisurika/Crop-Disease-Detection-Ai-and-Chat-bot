@@ -97,6 +97,37 @@ Then open your browser at:
 - `requirements.txt` – root dependency list for the repo
 - `.gitignore` – files and folders excluded from Git
 
+## 👨‍💻 Author
+Thisurika Hasajith
+SLIIT Student  
+
+## 📂 Project Structure
+
+```bash
+CHATBOT/
+├── backend/
+│   ├── app.py                    # Main Flask app
+│   ├── train_cnn.py              # Model training script
+│   ├── preprocess_explore.py     # Data preprocessing & EDA
+│   ├── plant_disease_model.h5    # Trained model
+│   ├── class_indices.json        # Class mapping
+│   └── chat/
+│       └── chatbot.py            # Gemini + FAQ logic
+├── frontend/
+│   ├── templates/
+│   │   ├── index.html
+│   │   └── landing.html
+│   └── static/
+│       ├── css/style.css
+│       └── js/script.js
+├── dataset/color/                # Your 15 class folders
+├── .env                          # Api Keys
+├──  venv folder                 
+└── README.md
+
+
+
+
 ## Troubleshooting
 
 - If TensorFlow fails to load, confirm your Python version and installed packages.

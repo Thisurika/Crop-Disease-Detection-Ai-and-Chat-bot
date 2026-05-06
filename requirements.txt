@@ -1,0 +1,25 @@
+# Core web framework
+flask==3.0.3
+
+# Machine Learning & Model
+tensorflow==2.17.0          # or tensorflow-cpu==2.17.0 if no GPU
+numpy==1.26.4
+
+# Image processing
+pillow==10.4.0
+opencv-python==4.10.0.84    # for faster image loading (optional but useful)
+
+# Data exploration & plotting
+matplotlib==3.9.2
+seaborn==0.13.2
+pandas==2.2.3
+scipy==1.14.1               # required by seaborn/matplotlib in some cases
+
+# Chatbot / LLM
+groq==0.11.0                # Groq API client
+
+# Environment variables (for API keys)
+python-dotenv==1.0.1
+
+# HTTP requests (if needed for external APIs later)
+requests==2.32.3

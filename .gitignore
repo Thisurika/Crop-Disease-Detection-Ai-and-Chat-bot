@@ -1,0 +1,11 @@
+plant_disease_model.h5
+__pycache__/
+.ipynb_checkpoints/
+dataset/
+logs/
+class_indices.json
+venv/
+env/
+.venv/
+.env
+*.pyc
